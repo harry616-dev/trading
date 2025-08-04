@@ -1534,51 +1534,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle form submission
-  const allUserData = [];
+    signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(signupForm);
+        const userData = {
+            fullName: formData.get('fullName'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            country: formData.get('country')
+        };
 
-  signupForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+        // Hide modal
+        modal.style.display = 'none';
 
-    const formData = new FormData(signupForm);
-    const userData = {
-      fullName: formData.get('fullName'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      country: formData.get('country')
-    };
+        // Update user info in header
+        // const userInfoSpan = document.querySelector('.info-card span:last-child');
+        // userInfoSpan.textContent = `👤 ${userData.fullName}`;
+        
+        // Replace sign up button with logout button
+        // signupBtn.outerHTML = '<button class="logout -btn" onclick="logout()">Logout</button>';
 
-    // Store to memory
-    allUserData.push(userData);
+        // Hide main sections and show account dashboard
+        // heroSection.style.display = 'none';
+        // actionCards.style.display = 'none';
+        // navBar.style.display = 'none';
+        // currencySection.style.display = 'none';
+        
+        // Show account dashboard
+        // accountDashboard.style.display = 'block';
+        signup.style.display = 'none';
+        signedup.style.display = 'block';
+        bonusoffer.style.display = 'block';
+        
+        // Populate dashboard with user data
+        document.getElementById('userName').textContent = userData.fullName;
+        document.getElementById('userEmail').textContent = userData.email;
+        document.getElementById('userPhone').textContent = userData.phone;
+        document.getElementById('userCountry').textContent = userData.country;
 
-    // Convert to plain text
-    const textContent = allUserData.map(user => 
-      `Name: ${user.fullName}, Email: ${user.email}, Phone: ${user.phone}, Country: ${user.country}`
-    ).join('\n');
-
-    // Create downloadable file
-    const blob = new Blob([textContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'users.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-
-    // Your existing UI logic...
-    signup.style.display = 'none';
-    signedup.style.display = 'block';
-    bonusoffer.style.display = 'block';
-
-    document.getElementById('userName').textContent = userData.fullName;
-    document.getElementById('userEmail').textContent = userData.email;
-    document.getElementById('userPhone').textContent = userData.phone;
-    document.getElementById('userCountry').textContent = userData.country;
-
-    setTimeout(() => {
-      accountDashboard.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  });
-
+        // Show success animation
+        setTimeout(() => {
+            accountDashboard.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    });
 });
 
 // Logout function
