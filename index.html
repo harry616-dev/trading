@@ -822,7 +822,7 @@
             <span>🌐 English</span>
             <span>👤</span>
               <button class="signup-btn" id="signup">Sign Up</button>
-            <button class="signup-btn" id="signedup" style="background: #ffd700; color:black; display: none;">Deepanshu</button>
+            <button class="signup-btn" id="signedup" style="background: #ffd700; color:black; display: none;"></button>
         </div>
     </header>
 
@@ -1567,6 +1567,7 @@ document.addEventListener('DOMContentLoaded', function() {
         signup.style.display = 'none';
         signedup.style.display = 'block';
         bonusoffer.style.display = 'block';
+        signedup.innerHTML = `${userData.fullName}`;
         
         // Populate dashboard with user data
         document.getElementById('userName').textContent = userData.fullName;
